@@ -34,7 +34,7 @@ cp -r path/to/agent-profiles-defaults/.github/agents .github/
 
 Already using VS Code Copilot? Paste this prompt into Copilot Chat and it will fetch the agents, add them to your project, and tailor them to your codebase:
 
-> Add agents to this project following https://github.com/appatalks/agent-profiles-defaults — then customize them for this project's goals, stack, and conventions.
+> Add agents to this project following https://github.com/appatalks/agent-profiles-defaults, then customize them for this project's goals, stack, and conventions.
 
 Copilot will pull the agent definitions, place them in `.github/agents/`, and adapt the instructions, review dimensions, and implementation standards to fit your project.
 
@@ -42,9 +42,9 @@ Copilot will pull the agent definitions, place them in `.github/agents/`, and ad
 
 Append your role or job title to the prompt and Copilot will tune the conductor's workflow, review priorities, and implementation standards to match your domain:
 
-> Add agents to this project following https://github.com/appatalks/agent-profiles-defaults — customize them for this project and optimize the conductor for my role as a **{your role}**.
+> Add agents to this project following https://github.com/appatalks/agent-profiles-defaults, customize them for this project, and optimize the conductor for my role as a **{your role}**.
 
-Replace `{your role}` with whatever fits — for example:
+Replace `{your role}` with whatever fits. For example:
 
 | Role | What changes |
 |------|-------------|
@@ -56,15 +56,15 @@ Replace `{your role}` with whatever fits — for example:
 | GitHub Sales | Conductor emphasizes demo-readiness, API usage examples, and customer-facing polish |
 | Microsoft Support | Conductor prioritizes backward compatibility, diagnostic logging, and error-message clarity |
 
-Any job title or domain works — the prompt is freeform.
+Any job title or domain works. The prompt is freeform.
 
 ## Usage
 
 In VS Code Copilot Chat, select an agent from the agent picker:
 
-- **@reviewer** — Review code for security, performance, and quality issues
-- **@implementer** — Write or fix code based on feedback
-- **@conductor** — Run the full review-implement-re-review loop automatically (max 3 cycles)
+- **@reviewer**: Review code for security, performance, and quality issues
+- **@implementer**: Write or fix code based on feedback
+- **@conductor**: Run the full review-implement-re-review loop automatically (max 3 cycles)
 
 ## Customization
 
@@ -82,6 +82,10 @@ Each agent has a **Reasoning Discipline** section in its body that primes the mo
 |-------|-------|-----------|
 | `reviewer` | extra-high | Deep, exhaustive analysis across security, performance, and quality |
 | `implementer` | high | Careful planning for non-trivial edits, efficient on mechanical fixes |
-| `conductor` | medium | Routing and triage only — avoids burning the cycle budget on re-analysis |
+| `conductor` | medium | Routing and triage only. Avoids burning the cycle budget on re-analysis |
 
 VS Code's agent frontmatter does not currently expose a per-agent reasoning knob, so these levels are enforced via in-prompt instructions. Adjust the **Reasoning Discipline** section in any `.agent.md` body to retune.
+
+### Author-Ambiguous Writing Style
+
+The conductor ships with a **Writing Style** directive that strips common AI-writing tells from its output (em-dashes, "Certainly!" openers, hedging stacks, marketing-tone headers, and so on). Status updates, summaries, and relayed findings are rewritten through this filter so the prose reads as plausibly human-authored. Edit or remove the **Writing Style** section in `.github/agents/conductor.agent.md` if you prefer different defaults.
