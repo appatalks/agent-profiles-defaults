@@ -30,6 +30,14 @@ cp -r path/to/agent-profiles-defaults/.github/agents .github/
 
 
 
+## Use Copilot to Install & Customize
+
+Already using VS Code Copilot? Paste this prompt into Copilot Chat and it will fetch the agents, add them to your project, and tailor them to your codebase:
+
+> Add agents to this project following https://github.com/appatalks/agent-profiles-defaults — then customize them for this project's goals, stack, and conventions.
+
+Copilot will pull the agent definitions, place them in `.github/agents/`, and adapt the instructions, review dimensions, and implementation standards to fit your project.
+
 ## Usage
 
 In VS Code Copilot Chat, select an agent from the agent picker:
