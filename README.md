@@ -38,6 +38,26 @@ Already using VS Code Copilot? Paste this prompt into Copilot Chat and it will f
 
 Copilot will pull the agent definitions, place them in `.github/agents/`, and adapt the instructions, review dimensions, and implementation standards to fit your project.
 
+### Role-Based Customization (Optional)
+
+Append your role or job title to the prompt and Copilot will tune the conductor's workflow, review priorities, and implementation standards to match your domain:
+
+> Add agents to this project following https://github.com/appatalks/agent-profiles-defaults — customize them for this project and optimize the conductor for my role as a **{your role}**.
+
+Replace `{your role}` with whatever fits — for example:
+
+| Role | What changes |
+|------|-------------|
+| Teacher | Conductor prioritizes readability, clear naming, and documentation; reviewer flags pedagogical anti-patterns |
+| Security Researcher | Conductor escalates all OWASP findings to Critical; reviewer adds threat-modeling and CVE-reference checks |
+| Accountant | Conductor enforces data-integrity checks, audit logging, and decimal-precision validation |
+| Secretary / Admin | Conductor focuses on workflow automation quality, input validation, and PII handling |
+| GitHub Customer Reliability Engineer | Conductor adds SLO-aware review gates, incident-response patterns, and observability checks |
+| GitHub Sales | Conductor emphasizes demo-readiness, API usage examples, and customer-facing polish |
+| Microsoft Support | Conductor prioritizes backward compatibility, diagnostic logging, and error-message clarity |
+
+Any job title or domain works — the prompt is freeform.
+
 ## Usage
 
 In VS Code Copilot Chat, select an agent from the agent picker:
