@@ -13,13 +13,13 @@ Three VS Code Copilot agents that create an automated code review loop between t
 Run this from the root of your project:
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/YOUR_USER/agent-profiles-defaults/main/.github/agents/{reviewer,implementer,conductor}.agent.md -o .github/agents/#1.agent.md --create-dirs
+curl -fsSL https://raw.githubusercontent.com/appatalks/agent-profiles-defaults/main/.github/agents/{reviewer,implementer,conductor}.agent.md -o .github/agents/#1.agent.md --create-dirs
 ```
 
 Or clone and copy:
 
 ```bash
-git clone https://github.com/YOUR_USER/agent-profiles-defaults.git /tmp/apd && cp -r /tmp/apd/.github/agents .github/ && rm -rf /tmp/apd
+git clone https://github.com/appatalks/agent-profiles-defaults.git /tmp/apd && cp -r /tmp/apd/.github/agents .github/ && rm -rf /tmp/apd
 ```
 
 Or if you just want to copy from a local clone:
@@ -28,7 +28,7 @@ Or if you just want to copy from a local clone:
 cp -r path/to/agent-profiles-defaults/.github/agents .github/
 ```
 
-> Replace `YOUR_USER` with the GitHub username or org hosting this repo.
+
 
 ## Usage
 
