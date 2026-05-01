@@ -73,3 +73,15 @@ Edit the `model:` field in any `.agent.md` frontmatter to swap models. The model
 ```yaml
 model: ['Claude Opus 4.7 (copilot)', 'Claude Sonnet 4 (copilot)']
 ```
+
+### Reasoning Effort
+
+Each agent has a **Reasoning Discipline** section in its body that primes the model to deliberate at the appropriate level for its role:
+
+| Agent | Level | Rationale |
+|-------|-------|-----------|
+| `reviewer` | extra-high | Deep, exhaustive analysis across security, performance, and quality |
+| `implementer` | high | Careful planning for non-trivial edits, efficient on mechanical fixes |
+| `conductor` | medium | Routing and triage only — avoids burning the cycle budget on re-analysis |
+
+VS Code's agent frontmatter does not currently expose a per-agent reasoning knob, so these levels are enforced via in-prompt instructions. Adjust the **Reasoning Discipline** section in any `.agent.md` body to retune.
