@@ -1,19 +1,18 @@
 # Agent Profiles Defaults
 
-Three VS Code Copilot agents that create an automated code review loop between two different models.
+Two VS Code Copilot agents for a lead-builder workflow with mandatory reviewer approval.
 
 | Agent | Model | Role |
 |-------|-------|------|
-| `reviewer` | Claude Opus 4.7 | Read-only code review (security, performance, quality) |
-| `implementer` | GPT-5.5 | Applies fixes and writes code |
-| `conductor` | Claude Opus 4.7 | Orchestrates review → implement → re-review loops |
+| `builder` | GPT-5.5 | Lead agent for planning, editing, testing, and shipping work |
+| `reviewer` | Claude Opus 4.6 | Equal partner for comprehensive review, test design, test execution, and approval |
 
 ## Quick Install
 
 Run this from the root of your project:
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/appatalks/agent-profiles-defaults/main/.github/agents/{reviewer,implementer,conductor}.agent.md -o .github/agents/#1.agent.md --create-dirs
+curl -fsSL https://raw.githubusercontent.com/appatalks/agent-profiles-defaults/main/.github/agents/{builder,reviewer}.agent.md -o .github/agents/#1.agent.md --create-dirs
 ```
 
 Or clone and copy:
@@ -28,33 +27,31 @@ Or if you just want to copy from a local clone:
 cp -r path/to/agent-profiles-defaults/.github/agents .github/
 ```
 
-
-
 ## Use Copilot to Install & Customize
 
 Already using VS Code Copilot? Paste this prompt into Copilot Chat and it will fetch the agents, add them to your project, and tailor them to your codebase:
 
 > Add agents to this project following https://github.com/appatalks/agent-profiles-defaults, then customize them for this project's goals, stack, and conventions.
 
-Copilot will pull the agent definitions, place them in `.github/agents/`, and adapt the instructions, review dimensions, and implementation standards to fit your project.
+Copilot will pull the agent definitions, place them in `.github/agents/`, and adapt Builder's workflow, review dimensions, and implementation standards to fit your project.
 
 ### Role-Based Customization (Optional)
 
-Append your role or job title to the prompt and Copilot will tune the conductor's workflow, review priorities, and implementation standards to match your domain:
+Append your role or job title to the prompt and Copilot will tune Builder's workflow and the reviewer's approval criteria to match your domain:
 
-> Add agents to this project following https://github.com/appatalks/agent-profiles-defaults, customize them for this project, and optimize the conductor for my role as a **{your role}**.
+> Add agents to this project following https://github.com/appatalks/agent-profiles-defaults, customize them for this project, and optimize Builder and reviewer for my role as a **{your role}**.
 
 Replace `{your role}` with whatever fits. For example:
 
 | Role | What changes |
 |------|-------------|
-| Teacher | Conductor prioritizes readability, clear naming, and documentation; reviewer flags pedagogical anti-patterns |
-| Security Researcher | Conductor escalates all OWASP findings to Critical; reviewer adds threat-modeling and CVE-reference checks |
-| Accountant | Conductor enforces data-integrity checks, audit logging, and decimal-precision validation |
-| Secretary / Admin | Conductor focuses on workflow automation quality, input validation, and PII handling |
-| GitHub Customer Reliability Engineer | Conductor adds SLO-aware review gates, incident-response patterns, and observability checks |
-| GitHub Sales | Conductor emphasizes demo-readiness, API usage examples, and customer-facing polish |
-| Microsoft Support | Conductor prioritizes backward compatibility, diagnostic logging, and error-message clarity |
+| Teacher | Builder prioritizes readable examples and clear naming; reviewer checks pedagogical fit |
+| Security Researcher | Builder treats exploitability as a first-class design concern; reviewer adds threat modeling and CVE-aware checks |
+| Accountant | Builder enforces data integrity, auditability, and decimal precision; reviewer tests financial edge cases |
+| Secretary / Admin | Builder focuses on workflow automation quality and PII handling; reviewer checks permissions and input validation |
+| GitHub Customer Reliability Engineer | Builder adds SLO-aware changes and observability; reviewer checks incident-readiness and diagnostics |
+| GitHub Sales | Builder emphasizes demo-readiness and customer-facing polish; reviewer checks examples and presentation risk |
+| Microsoft Support | Builder prioritizes compatibility and diagnostic clarity; reviewer checks supportability and error messages |
 
 Any job title or domain works. The prompt is freeform.
 
@@ -62,16 +59,25 @@ Any job title or domain works. The prompt is freeform.
 
 In VS Code Copilot Chat, select an agent from the agent picker:
 
-- **@reviewer**: Review code for security, performance, and quality issues
-- **@implementer**: Write or fix code based on feedback
-- **@conductor**: Run the full review-implement-re-review loop automatically (max 3 cycles)
+- **@builder**: Lead implementation agent. Plans, edits, tests, and requests reviewer approval before closing every task
+- **@reviewer**: Comprehensive review partner. Reviews plans and diffs, designs and runs tests, rubber-ducks decisions, and returns APPROVE / REQUEST CHANGES / NEEDS DISCUSSION
+
+## Workflow
+
+1. Start with **@builder** for most tasks.
+2. Builder reads the code, plans the work, implements changes, and runs focused verification.
+3. Builder sends the result to **@reviewer** for approval.
+4. Reviewer examines all relevant angles, runs or designs tests, and returns a verdict.
+5. Builder addresses requested changes until reviewer approves or the user explicitly overrides the gate.
+
+For high-risk or ambiguous work, Builder can also ask reviewer to rubber-duck the plan before editing.
 
 ## Customization
 
 Edit the `model:` field in any `.agent.md` frontmatter to swap models. The model format is `"Model Name (copilot)"`. You can also use an array for fallback:
 
 ```yaml
-model: ['Claude Opus 4.7 (copilot)', 'Claude Sonnet 4 (copilot)']
+model: ['GPT-5.5 (copilot)', 'Claude Opus 4.6 (copilot)']
 ```
 
 ### Reasoning Effort
@@ -80,12 +86,11 @@ Each agent has a **Reasoning Discipline** section in its body that primes the mo
 
 | Agent | Level | Rationale |
 |-------|-------|-----------|
-| `reviewer` | extra-high | Deep, exhaustive analysis across security, performance, and quality |
-| `implementer` | high | Careful planning for non-trivial edits, efficient on mechanical fixes |
-| `conductor` | medium | Routing and triage only. Avoids burning the cycle budget on re-analysis |
+| `builder` | extra-high | Leads execution, plans changes, reasons through risks, and coordinates approval |
+| `reviewer` | high | Performs comprehensive review, designs and runs tests, and approves or requests changes |
 
 VS Code's agent frontmatter does not currently expose a per-agent reasoning knob, so these levels are enforced via in-prompt instructions. Adjust the **Reasoning Discipline** section in any `.agent.md` body to retune.
 
-### Author-Ambiguous Writing Style
+### Approval Gate
 
-The conductor ships with a **Writing Style** directive that strips common AI-writing tells from its output (em-dashes, "Certainly!" openers, hedging stacks, marketing-tone headers, and so on). Status updates, summaries, and relayed findings are rewritten through this filter so the prose reads as plausibly human-authored. Edit or remove the **Writing Style** section in `.github/agents/conductor.agent.md` if you prefer different defaults.
+Builder must obtain reviewer approval for every ask before presenting the task as complete. Reviewer should approve only when the work satisfies the request, the verification is adequate for the risk level, and any remaining concerns are clearly non-blocking.
