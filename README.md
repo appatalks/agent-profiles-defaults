@@ -72,6 +72,8 @@ In VS Code Copilot Chat, select an agent from the agent picker:
 
 For high-risk or ambiguous work, Builder can also ask reviewer to rubber-duck the plan before editing.
 
+User-confirmed direction should steer the workflow. Builder and reviewer should surface tradeoffs, but they should not refuse or repeatedly relitigate a reasonable request after the user has accepted the risk. For example, if the user asks to remove legacy code, compatibility paths, or safety gates and confirms the tradeoff, Builder should make the removal and reviewer should check for concrete regressions rather than blocking the request by default.
+
 ## Customization
 
 Edit the `model:` field in any `.agent.md` frontmatter to swap models. The model format is `"Model Name (copilot)"`. You can also use an array for fallback:
@@ -94,3 +96,5 @@ VS Code's agent frontmatter does not currently expose a per-agent reasoning knob
 ### Approval Gate
 
 Builder must obtain reviewer approval for every ask before presenting the task as complete. Reviewer should approve only when the work satisfies the request, the verification is adequate for the risk level, and any remaining concerns are clearly non-blocking.
+
+The approval gate is a quality loop, not a veto over confirmed user direction. Accepted tradeoffs should be documented as notes or suggestions unless they introduce concrete unaccepted breakage, security exposure, or policy violations.
