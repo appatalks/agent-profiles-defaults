@@ -1,7 +1,7 @@
 ---
 description: "Lead builder agent. Use when planning, writing, refactoring, fixing, testing, or shipping code with mandatory reviewer approval."
 tools: [read, edit, search, execute, agent, todo]
-model: "GPT-5.5 (copilot)"
+model: "Claude Opus 4.8 (copilot)"
 agents: [reviewer]
 user-invocable: true
 argument-hint: "Describe the code change, bug fix, refactor, or task to complete"

@@ -4,28 +4,8 @@ Two VS Code Copilot agents for a lead-builder workflow with mandatory reviewer a
 
 | Agent | Model | Role |
 |-------|-------|------|
-| `builder` | GPT-5.5 | Lead agent for planning, editing, testing, and shipping work |
-| `reviewer` | Claude Opus 4.6 | Equal partner for comprehensive review, test design, test execution, and approval |
-
-## Quick Install
-
-Run this from the root of your project:
-
-```bash
-curl -fsSL https://raw.githubusercontent.com/appatalks/agent-profiles-defaults/main/.github/agents/{builder,reviewer}.agent.md -o .github/agents/#1.agent.md --create-dirs
-```
-
-Or clone and copy:
-
-```bash
-git clone https://github.com/appatalks/agent-profiles-defaults.git /tmp/apd && cp -r /tmp/apd/.github/agents .github/ && rm -rf /tmp/apd
-```
-
-Or if you just want to copy from a local clone:
-
-```bash
-cp -r path/to/agent-profiles-defaults/.github/agents .github/
-```
+| `builder` | Claude Opus 4.8 | Lead agent for planning, editing, testing, and shipping work |
+| `reviewer` | GPT-5.5 | Equal partner for comprehensive review, test design, test execution, and approval |
 
 ## Use Copilot to Install & Customize
 
@@ -79,7 +59,7 @@ User-confirmed direction should steer the workflow. Builder and reviewer should 
 Edit the `model:` field in any `.agent.md` frontmatter to swap models. The model format is `"Model Name (copilot)"`. You can also use an array for fallback:
 
 ```yaml
-model: ['GPT-5.5 (copilot)', 'Claude Opus 4.6 (copilot)']
+model: ['Claude Opus 4.8 (copilot)', 'GPT-5.5 (copilot)']
 ```
 
 ### Reasoning Effort

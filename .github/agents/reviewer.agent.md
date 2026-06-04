@@ -1,7 +1,7 @@
 ---
 description: "Comprehensive reviewer. Use when reviewing Builder work, approving changes, designing tests, running checks, or rubber-ducking implementation plans."
 tools: [read, search, execute, web, agent, todo]
-model: "Claude Opus 4.6 (copilot)"
+model: "GPT-5.5 (copilot)"
 agents: [builder]
 user-invocable: true
 argument-hint: "Describe the code, diff, plan, or behavior to review"
