@@ -78,3 +78,13 @@ VS Code's agent frontmatter does not currently expose a per-agent reasoning knob
 Builder must obtain reviewer approval for every ask before presenting the task as complete. Reviewer should approve only when the work satisfies the request, the verification is adequate for the risk level, and any remaining concerns are clearly non-blocking.
 
 The approval gate is a quality loop, not a veto over confirmed user direction. Accepted tradeoffs should be documented as notes or suggestions unless they introduce concrete unaccepted breakage, security exposure, or policy violations.
+
+---
+
+## Built With Eva-Agent
+
+This project was created with technology developed in [Eva-Agent](https://github.com/appatalks/eva-agent/).
+
+<p align="center">
+	<a href="https://github.com/appatalks/eva-agent/"><img src="assets/Built_with_Eva-Agent.png" alt="Built with Eva-Agent" width="420"></a>
+</p>
