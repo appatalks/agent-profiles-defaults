@@ -72,6 +72,10 @@ Include a role in the installation request to tune the workflow for your domain:
 
 Any role or domain works; use the language your team already uses.
 
+## License
+
+Released under the [MIT License](LICENSE).
+
 ---
 
 ## Built With Eva-Agent
